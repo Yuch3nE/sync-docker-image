@@ -1,5 +1,5 @@
 name: 'Sync Image: [mihomo:latest]'
-run-name: Sync ${{ github.event.env.source_repo }} to ${{ github.event.env.destination_repo }}
+run-name: Sync ${{ github.env.source_repo }} to ${{ github.env.destination_repo }}
 on: 
   workflow_dispatch:
 env:
