@@ -1,0 +1,25 @@
+name: 'Sync Image: [mihomo:Alpha]'
+run-name: Sync metacubex/mihomo:Alpha to yuch3n/mihomo:Alpha
+on: 
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 5" 
+
+env:
+  source: 'docker.io'
+  destination: 'registry.cn-hangzhou.aliyuncs.com'
+  source_repo: 'metacubex/mihomo:Alpha'
+  destination_repo: 'yuch3n/mihomo:Alpha'
+
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Sync Image: [${{ env.source_repo }}]'
+      uses: ikrong/docker-sync-action@main
+      with:
+        source: ${{ env.source }}
+        source-credential: ${{ secrets.SOURCE_CREDENTIAL }}
+        destination: ${{ env.destination }}
+        destination-credential: ${{ secrets.DESTINATION_CREDENTIAL }}
+        copy: "${{ env.source_repo }} ${{ env.destination_repo }}"
